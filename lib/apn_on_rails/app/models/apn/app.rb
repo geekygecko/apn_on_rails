@@ -54,7 +54,7 @@ class APN::App < APN::Base
         end
       end
     ensure
-      APN::Notification.update_all(['sent_at = ?', Time.now.utc], ['id in (?)', sent_ids]) if sent_ids.any?
+      APN::Notification.where('id in (?)', sent_ids).update_all(['sent_at = ?', Time.now.utc]) if sent_ids.any?
     end
   end
 
